@@ -69,11 +69,12 @@
           <form @submit='handleSubmit'>
             <h1>{{ title }}</h1>           
             <custom-input 
-            v-for="(input, i) in inputs"
-            :key="i"
-            :type="input.type"
-            v-model="input.value" 
-            :label="input.label" />
+              v-for="(input, i) in inputs"
+              :key="i"
+              :type="input.type"
+              v-model="input.value" 
+              :label="input.label" 
+            />
             <button type="submit">Submit</button>
           </form>
         `,
