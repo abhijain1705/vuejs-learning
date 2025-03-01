@@ -22,6 +22,11 @@
       [v-cloak] {
         display: none;
       }
+
+      input {
+        display: block;
+        margin-bottom: 5px;
+      }
     </style>
   </head>
   <body>
@@ -62,9 +67,13 @@
       app.component("login-form", {
         template: `
           <form @submit='handleSubmit'>
-            <h1>{{ title }}</h1>
-            <custom-input type="email" v-model="email" :label="emailLabel" />
-            <custom-input type="password" v-model="password" :label="passwordLabel" />
+            <h1>{{ title }}</h1>           
+            <custom-input 
+            v-for="(input, i) in inputs"
+            :key="i"
+            :type="input.type"
+            v-model="input.value" 
+            :label="input.label" />
             <button type="submit">Submit</button>
           </form>
         `,
@@ -72,18 +81,21 @@
         data() {
           return {
             title: "Login Form",
-            email: "",
-            emailLabel: "Email",
-            passwordLabel: "Password",
-            password: "",
+            inputs: [
+              { label: "email", value: "", type: "email" },
+              { label: "name", value: "", type: "text" },
+              { label: "password", value: "", type: "password" },
+            ],
           };
         },
         methods: {
           handleSubmit(e) {
             e.preventDefault();
-            console.log("Email:", this.email);
-            console.log("Password:", this.password);
-            console.log("Form Submitted");
+            console.log(
+              this.inputs[0].value,
+              this.inputs[1].value,
+              this.inputs[2].value
+            );
           },
         },
       });
