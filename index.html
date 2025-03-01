@@ -26,6 +26,8 @@
   </head>
   <body>
     <div id="app" v-cloak>
+      <login-form />
+
       <h1>{{ message }}</h1>
       <input @keyup.enter="greet" v-model="message" />
       <hr />
@@ -53,6 +55,32 @@
           },
           greet: function () {
             console.log("Hello", this.message);
+          },
+        },
+      });
+
+      app.component("login-form", {
+        template: `
+          <form @submit='handleSubmit'>
+            <h1>{{ title }}</h1>
+            <input type="email" v-model='email' />
+            <input type="password" v-model='password' />
+            <button type="submit">Submit</button>
+          </form>
+        `,
+        data() {
+          return {
+            title: "Login Form",
+            email: "",
+            password: "",
+          };
+        },
+        methods: {
+          handleSubmit(e) {
+            e.preventDefault();
+            console.log("Email:", this.email);
+            console.log("Password:", this.password);
+            console.log("Form Submitted");
           },
         },
       });
