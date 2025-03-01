@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+
+      .two {
+        background-color: blue;
+      }
+
+      .three {
+        background-color: green;
+      }
+
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <h1>{{ message }}</h1>
+      <input @keyup.enter="greet" v-model="message" />
+      <hr />
+      <button @click="toggleBox">
+        {{ isVisible ? 'Hide Box' : 'Show Box' }}
+      </button>
+      <div v-if="isVisible" class="box"></div>
+      <div v-else-if="isVisible2" class="box two"></div>
+      <div v-else class="box three"></div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      let app = Vue.createApp({
+        data() {
+          return {
+            message: "Hello World",
+            isVisible: false,
+            isVisible2: false,
+          };
+        },
+        methods: {
+          toggleBox: function () {
+            this.isVisible = !this.isVisible;
+          },
+          greet: function () {
+            console.log("Hello", this.message);
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
